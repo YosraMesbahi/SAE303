@@ -1,43 +1,56 @@
-async function afficherCinema() {
-    //Initialisation de la carte, centrée sur Paris 
-    const map = L.map('map').setView([48.8566, 2.3522], 11);
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+async function initSite() {
+    // 1. Initialisation de la Carte (L.map)
+    const map = L.map('carte').setView([48.8566, 2.3522], 10);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
     try {
-        //Récupération du fichier json
-        const reponse = await fetch("./geo-les_salles_de_cinemas_en_ile-de-france.json");
-        const cinemas = await reponse.json();
+        // 2. Chargement du fichier JSON
+        const response = await fetch("./geo-les_salles_de_cinemas_en_ile-de-france.json");
+        const data = await response.json();
 
-        // Boucle sur chaque cinema pour placer un marqueur
-        cinemas.forEach(cinema => {
+        // --- TRAITEMENT DES DONNÉES ---
+        const villesData = {};
+        const types = { "Petites salles (1-2)": 0, "Cinémas Moyens (3-7)": 0, "Multiplexes (8+)": 0 };
+
+        data.forEach(cinema => {
+            // A. Ajout des marqueurs sur la carte avec TOUTES les infos
             if (cinema.geo) {
-                const coordonnees = cinema.geo.split(',');
+                const coords = cinema.geo.split(',');
+                const marker = L.marker([parseFloat(coords[0]), parseFloat(coords[1])]).addTo(map);
                 
-                const latitude = parseFloat(coordonnees[0]);
-                const longitude = parseFloat(coordonnees[1]);
-
-                //Création du marqueur 
-                const marker = L.marker([latitude, longitude]).addTo(map);
-
-                //Ajout d'une popup avec les infos
                 marker.bindPopup(`
-                    ${cinema.nom}
-                    ${cinema.adresse}
-                    ${cinema.commune}
-                    ${cinema.fauteuils} fauteuils
+                    <div style="font-family: 'Poppins', sans-serif;">
+                        <strong style="color:#e63946; font-size:1.1rem;">${cinema.nom}</strong><br>
+                        <b>Adresse :</b> ${cinema.adresse}, ${cinema.commune}<br>
+                        <b>Écrans :</b> ${cinema.ecrans}<br>
+                        <b>Fauteuils :</b> ${cinema.fauteuils}<br>
+                        <hr>
+                        <small>Département : ${cinema.dep}</small>
+                    </div>
                 `);
             }
+
+            // B. Données pour le Top 10 Villes (hors Paris car trop dominant)
+            if (cinema.commune !== "Paris") {
+                villesData[cinema.commune] = (villesData[cinema.commune] || 0) + parseInt(cinema.fauteuils || 0);
+            }
+
+            // C. Données pour la Typologie
+            const nbEcrans = parseInt(cinema.ecrans || 0);
+            if (nbEcrans <= 2) types["Petites salles (1-2)"]++;
+            else if (nbEcrans <= 7) types["Cinémas Moyens (3-7)"]++;
+            else types["Multiplexes (8+)"]++;
         });
 
-        console.log("Carte et cinémas chargés");
+        
 
-    } catch (error) {
-        console.error("Erreur lors du chargement des données :", error);
+    } catch (e) {
+        console.error("Erreur lors du chargement des données :", e);
     }
 }
 
-afficherCinema();
+// Lancer le script au chargement
+initSite();
