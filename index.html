@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDF Cinémas - Exploration & Data</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">IDF CINÉMAS</div>
+    <ul>
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#carte">Carte</a></li>
+        <li><a href="#stats">Analyses</a></li>
+    </ul>
+</nav>
+
+<section class="hero" id="hero">
+    <div>
+        <h1>Exploration du réseau cinématographique</h1>
+        <p>Visualisation des données du CNC en Île-de-France</p>
+    </div>
+</section>
+
+<div id="carte"></div>
+
+
+
+<footer>
+    <p>Projet SAE 303 - MMI Cergy Pontoise - Données CNC</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="fetch.js"></script>
+
+</body>
+</html>
