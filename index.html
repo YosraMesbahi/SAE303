@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDF Cinémas - Exploration & Data</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>  
+<body>
+    <nav>
+        <div class="logo">IDF CINÉMAS</div>
+        <ul>
+            <li><a href="#hero">Accueil</a></li>
+            <li><a href="#carte">Carte</a></li>
+            <li><a href="#stats">Analyses</a></li>
+            <li><a href="#about">À propos</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero" id="hero">
+        <div>
+            <h1>Exploration du réseau cinématographique</h1>
+            <p>Visualisation des données du CNC en Île-de-France</p>
+        </div>
+    </section>
+    
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Rechercher une ville (ex: Versailles, Montreuil, Cergy...)">
+            <button onclick="searchCity()">Rechercher</button>
+        </div>
+        <div id="searchResult" class="search-result"></div>
+    </div>
+    
+    <div id="carte"></div>
+    
+    <section class="stats-section" id="stats">
+        <div class="stats-header">
+            <h2>Statistiques & Analyses</h2>
+            <p>Découvrez les données clés du réseau cinématographique francilien</p>
+        </div>
+        
+        <div class="filters-container">
+            <button class="filter-btn active" onclick="filterStats('all')">Tous</button>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card" data-filter="capacity">
+                <h3>Plus Grande Capacité</h3>
+                <div class="stat-value" id="maxFauteuilsValue">-</div>
+                <div class="stat-label">fauteuils</div>
+                <div class="stat-detail" id="maxFauteuilsDetail">Chargement...</div>
+            </div>
+            
+            <div class="stat-card" data-filter="screens">
+                <h3>Plus d'Écrans</h3>
+                <div class="stat-value" id="maxEcransValue">-</div>
+                <div class="stat-label">écrans</div>
+                <div class="stat-detail" id="maxEcransDetail">Chargement...</div>
+            </div>
+            
+            <div class="stat-card" data-filter="total">
+                <h3>Total Cinémas</h3>
+                <div class="stat-value" id="totalCinemas">-</div>
+                <div class="stat-label">établissements</div>
+                <div class="stat-detail" id="totalDetails">En Île-de-France</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <h2>À propos du projet</h2>
+            
+        
+        </div>
+    </section>
+    
+    <footer>
+        <p>Projet SAE 303 - MMI Cergy Pontoise - Données CNC</p>
+    </footer>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/Leaflet.markercluster.js"></script>
+    <script src="fetch.js"></script>
+</body>
+</html>
