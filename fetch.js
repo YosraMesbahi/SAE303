@@ -220,4 +220,3 @@ document.getElementById('topCinemaSelect').addEventListener('change', function(e
     updateChart(e.target.value);
 });
 initSite();
-
