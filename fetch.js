@@ -221,4 +221,7 @@ document.getElementById('topCinemaSelect').addEventListener('change', function(e
 });
 
 initSite();
+<<<<<<< HEAD
 
+=======
+>>>>>>> b7ac8a5543bc3948c465207194111aae7005a44e
