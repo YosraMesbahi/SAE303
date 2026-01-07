@@ -219,5 +219,4 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
 document.getElementById('topCinemaSelect').addEventListener('change', function(e) {
     updateChart(e.target.value);
 });
-
 initSite();
