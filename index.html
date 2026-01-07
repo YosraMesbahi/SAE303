@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
   </head>  
 <body>
     <nav>
@@ -45,42 +46,68 @@
             <p>Découvrez les données clés du réseau cinématographique francilien</p>
         </div>
         
-        <div class="filters-container">
-            <button class="filter-btn active" onclick="filterStats('all')">Tous</button>
+        <!-- Section avec sélecteur et graphique -->
+        <div class="selector-container">
+            <h3>Quel est le cinéma d'Île-de-France le plus ...</h3>
+            <select id="topCinemaSelect">
+                <option value="fauteuils">Grand (nombre de sièges)</option>
+                <option value="seances">Actif (nombre de séances)</option>
+                <option value="ecrans">Équipé (nombre d'écrans)</option>
+                <option value="entrees">Fréquenté (nombre d'entrées)</option>
+            </select>
         </div>
         
-        <div class="stats-grid">
-            <div class="stat-card" data-filter="capacity">
-                <h3>Plus Grande Capacité</h3>
-                <div class="stat-value" id="maxFauteuilsValue">-</div>
-                <div class="stat-label">fauteuils</div>
-                <div class="stat-detail" id="maxFauteuilsDetail">Chargement...</div>
+        <div class="results-grid">
+            <!-- Carte des résultats -->
+            <div class="result-card">
+                <h4>Cinéma Champion</h4>
+                <div class="cinema-info">
+                    <h3 id="topCinemaName">UGC CINÉ CITÉ LES HALLES</h3>
+                    <div class="stat-value" id="topCinemaValue">3 894</div>
+                    <div class="stat-label" id="topCinemaLabel">fauteuils</div>
+                    <div class="stat-detail" id="topCinemaCity">Situé à Paris 1er Arrondissement</div>
+                </div>
             </div>
             
-            <div class="stat-card" data-filter="screens">
-                <h3>Plus d'Écrans</h3>
-                <div class="stat-value" id="maxEcransValue">-</div>
-                <div class="stat-label">écrans</div>
-                <div class="stat-detail" id="maxEcransDetail">Chargement...</div>
-            </div>
-            
-            <div class="stat-card" data-filter="total">
-                <h3>Total Cinémas</h3>
-                <div class="stat-value" id="totalCinemas">-</div>
-                <div class="stat-label">établissements</div>
-                <div class="stat-detail" id="totalDetails">En Île-de-France</div>
+            <!-- Carte du graphique -->
+            <div class="result-card">
+                <h4>Top 5 des cinémas</h4>
+                <div class="chart-container">
+                    <canvas id="topChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
     
-    <section class="about-section" id="about">
-        <div class="about-content">
-            <h2>À propos du projet</h2>
-            
+<section class="about-section" id="about">
+    <div class="about-content">
+        <h2>À propos du projet</h2>
+        <p class="about-description">
+            Ce projet a été réalisé par trois étudiants en deuxième année de BUT MMI 
+            dans le cadre de la SAE 3.03. À travers ce travail de data visualisation, 
+            nous avons souhaité explorer et mettre en lumière les données des cinémas
+            en Île-de-France, en transformant des statistiques brutes en une 
+            expérience visuelle et accessible.
+        </p>
         
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Hakan Gunduz</h3>
+                <a href="https://www.linkedin.com/in/hakan-gunduz9514027/" target="_blank" class="linkedin-link">LinkedIn</a>
+            </div>
+            
+            <div class="about-card">
+                <h3>Yosra Mesbahi</h3>
+                <a href="https://www.linkedin.com/in/yosra-mesbahi/" target="_blank" class="linkedin-link">LinkedIn</a>
+            </div>
+            
+            <div class="about-card">
+                <h3>Gaëlle Poisson</h3>
+                <a href="https://www.linkedin.com/in/ga%C3%ABlle-poisson/" target="_blank" class="linkedin-link">LinkedIn</a>
+            </div>
         </div>
-    </section>
-    
+    </div>
+</section> 
     <footer>
         <p>Projet SAE 303 - MMI Cergy Pontoise - Données CNC</p>
     </footer>
