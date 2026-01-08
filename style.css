@@ -432,6 +432,49 @@ footer {
     text-align: center;
     padding: 2rem;
 }
+.footer-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logos img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer-logos img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-logos {
+        gap: 30px;
+    }
+    
+    .footer-logos img {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-logos {
+        gap: 20px;
+    }
+    
+    .footer-logos img {
+        height: 40px;
+    }
+}
+
 
 /* === LEAFLET CUSTOMIZATION === */
 
