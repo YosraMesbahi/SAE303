@@ -15,7 +15,12 @@
 <body>
     <nav>
         <div class="logo">IDF CINÉMAS</div>
-        <ul>
+        <button class="burger-menu" id="burgerBtn" aria-label="Menu de navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul id="navMenu">
             <li><a href="#hero">Accueil</a></li>
             <li><a href="#carte">Carte</a></li>
             <li><a href="#stats">Analyses</a></li>
@@ -107,10 +112,42 @@
     </div>
 </section> 
     <footer>
-        <p>Projet SAE 303 - MMI Cergy Pontoise - Données CNC</p>
+        <p>Projet SAE 303 - MMI Cergy Pontoise - <a href="https://data.iledefrance.fr/explore/dataset/les_salles_de_cinemas_en_ile-de-france/table/" class="linkedin-link"> Données CNC </a> </p>
+        <div class="footer-logos">
+            <img src="images/IUT.png" alt="logo IUT ">
+            <img src="images/CYU.png" alt="logo CYU">
+            <img src="images/MMI.png" alt="logo MMI">
+        </div>
     </footer>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/Leaflet.markercluster.js"></script>
     <script src="fetch.js"></script>
+    <script>
+        // Menu burger
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('nav ul a');
+        
+        burgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            burgerBtn.classList.toggle('active');
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                burgerBtn.classList.remove('active');
+            });
+        });
+        
+        // Fermer le menu si on clique en dehors
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+                navMenu.classList.remove('active');
+                burgerBtn.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
