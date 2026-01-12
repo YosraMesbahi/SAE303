@@ -6,8 +6,13 @@
     --secondary: #de6f8d;
 }
 
-* { box-sizing: border-box; }
+* { 
+    box-sizing: border-box; 
+}
 
+html{
+    scroll-behavior: smooth;
+}
 body { 
     font-family: 'Poppins', sans-serif; 
     margin: 0; 
@@ -384,7 +389,6 @@ nav a:hover {
 }
 
 .about-description {
-    text-align: center;
     max-width: 800px;
     margin: 0 auto 3rem;
     line-height: 1.8;
@@ -402,7 +406,7 @@ nav a:hover {
     display: inline-block;
     margin-top: 0.5rem;
     color: white;
-    text-decoration: underline;
+    text-decoration: none;
     transition: opacity 0.3s;
 }
 
