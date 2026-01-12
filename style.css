@@ -304,9 +304,12 @@ nav a:hover {
 
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .result-card {
@@ -316,6 +319,8 @@ nav a:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     border-top: 4px solid var(--primary);
     transition: all 0.3s;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .result-card:hover {
@@ -338,7 +343,7 @@ nav a:hover {
 
 .cinema-info h3 {
     color: var(--dark);
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
@@ -536,7 +541,7 @@ footer {
     }
     
     #carte {
-        height: 450px;
+        height: 250px;
     }
 }
 
@@ -584,7 +589,7 @@ footer {
     }
     
     #carte {
-        height: 400px;
+        height: 300px;
     }
     
     .search-box {
@@ -609,7 +614,7 @@ footer {
     }
     
     .chart-container {
-        height: 250px;
+        height: 350px;
     }
 }
 
@@ -636,7 +641,7 @@ footer {
     #topCinemaSelect {
         padding: 0.8rem 1rem;
         font-size: 0.9rem;
-        height: 350px;
+        height: 100%;
     }
     
     .about-section {
