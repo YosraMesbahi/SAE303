@@ -1,8 +1,8 @@
 :root { 
-    --primary: #E4003B; 
-    --dark: #202535; 
+    --primary: #E42313; 
+    --dark: #2A327B; 
     --light: #f8f9fa; 
-    --accent: #202535; 
+    --accent: #0e112d; 
     --secondary: #de6f8d;
 }
 
@@ -94,7 +94,7 @@ nav a:hover {
     align-items: center; 
     justify-content: center; 
     text-align: center; 
-    background: linear-gradient(135deg, var(--dark) 0%, var(--accent) 100%);
+    background: var(--dark);
     color: white; 
     margin-top: 60px; 
 }
@@ -180,21 +180,6 @@ nav a:hover {
     padding: 0 2rem;
 }
 
-.stats-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.stats-header h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    color: var(--dark);
-    margin-bottom: 0.5rem;
-}
-
-.stats-header p {
-    color: #666;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-}
 
 .filters-container {
     display: flex;
@@ -296,7 +281,7 @@ nav a:hover {
     margin: 3rem 0 2rem;
 }
 
-.selector-container h3 {
+.selector-container h2 {
     color: var(--primary);
     font-size: clamp(1.1rem, 3vw, 1.5rem);
     margin-bottom: 1rem;
@@ -366,7 +351,7 @@ nav a:hover {
 /* === ABOUT SECTION === */
 
 .about-section {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--accent) 100%);
+    background:  var(--dark);
     padding: 4rem 2rem;
     margin: 3rem 0 0 0;
     color: white;
@@ -452,6 +437,8 @@ footer {
 .footer-logos img {
     height: 60px;
     width: auto;
+    background-color: white;
+    border-radius: 12px;
     object-fit: contain;
     opacity: 0.8;
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -649,7 +636,7 @@ footer {
     #topCinemaSelect {
         padding: 0.8rem 1rem;
         font-size: 0.9rem;
-        width: 100%;
+        height: 350px;
     }
     
     .about-section {
