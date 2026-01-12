@@ -76,18 +76,6 @@ nav a:hover {
     transition: all 0.3s ease;
 }
 
-.burger-menu.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-
-.burger-menu.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.burger-menu.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
 .hero { 
     height: 40vh; 
     display: flex; 
