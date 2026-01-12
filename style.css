@@ -283,7 +283,7 @@ nav a:hover {
 
 .selector-container h2 {
     color: var(--primary);
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
