@@ -1,3 +1,29 @@
+// Menu burger
+const burgerBtn = document.getElementById('burgerBtn');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('nav ul a');
+
+burgerBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    burgerBtn.classList.toggle('active');
+});
+
+// Fermer le menu quand on clique sur un lien
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        burgerBtn.classList.remove('active');
+    });
+});
+
+// Fermer le menu si on clique en dehors
+document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+        navMenu.classList.remove('active');
+        burgerBtn.classList.remove('active');
+    }
+});
+
 let allData = [];
 let map;
 let markers = new L.MarkerClusterGroup({
@@ -44,9 +70,9 @@ function filterStats(type) {
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
-    
+
     const cards = document.querySelectorAll('.stat-card');
-    
+
     if (type === 'all') {
         cards.forEach(card => card.style.display = 'block');
     } else {
@@ -63,11 +89,11 @@ function filterStats(type) {
 function updateChart(criterion) {
     const data = chartData[criterion];
     const ctx = document.getElementById('topChart').getContext('2d');
-    
+
     if (myChart) {
         myChart.destroy();
     }
-    
+
     myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -117,7 +143,7 @@ function updateChart(criterion) {
             }
         }
     });
-    
+
     // Mise à jour des infos du cinéma
     document.getElementById('topCinemaName').textContent = data.cinema.nom;
     document.getElementById('topCinemaValue').textContent = data.cinema.value;
@@ -127,20 +153,20 @@ function updateChart(criterion) {
 
 async function initSite() {
     map = L.map('carte').setView([48.8566, 2.3522], 10);
-    
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
-    
+
     try {
         const response = await fetch("./geo-les_salles_de_cinemas_en_ile-de-france.json");
         allData = await response.json();
-        
+
         allData.forEach(cinema => {
             if (cinema.geo) {
                 const coords = cinema.geo.split(',');
                 const marker = L.marker([parseFloat(coords[0]), parseFloat(coords[1])]);
-                
+
                 marker.bindPopup(`
                     <div style="font-family: 'Poppins', sans-serif; min-width: 200px;">
                         <strong style="color:#E4003B; font-size:1.1rem;">${cinema.nom}</strong><br>
@@ -152,16 +178,16 @@ async function initSite() {
                         <small>Département : ${cinema.dep}</small>
                     </div>
                 `);
-                
+
                 markers.addLayer(marker);
             }
         });
-        
+
         map.addLayer(markers);
-        
+
         // Initialiser le graphique avec le critère par défaut
         updateChart('fauteuils');
-        
+
     } catch (e) {
         console.error("Erreur lors du chargement des données :", e);
         document.getElementById('searchResult').innerHTML = "Erreur de chargement des données";
@@ -172,28 +198,28 @@ async function initSite() {
 function searchCity() {
     const searchInput = document.getElementById('searchInput').value.trim();
     const resultDiv = document.getElementById('searchResult');
-    
+
     if (!searchInput) {
         resultDiv.innerHTML = "Veuillez entrer un nom de ville";
         resultDiv.className = 'search-result show error';
         return;
     }
-    
+
     const searchLower = searchInput.toLowerCase();
-    const cinemasInCity = allData.filter(cinema => 
+    const cinemasInCity = allData.filter(cinema =>
         cinema.commune && cinema.commune.toLowerCase().includes(searchLower)
     );
-    
+
     if (cinemasInCity.length === 0) {
         resultDiv.innerHTML = `❌ Aucun cinéma trouvé dans "${searchInput}"`;
         resultDiv.className = 'search-result show error';
     } else {
         const totalFauteuils = cinemasInCity.reduce((sum, c) => sum + parseInt(c.fauteuils || 0), 0);
         const totalEcrans = cinemasInCity.reduce((sum, c) => sum + parseInt(c.ecrans || 0), 0);
-        
+
         let html = `<strong style="color: #2d6a2d; font-size: 1.2rem;">✓ ${cinemasInCity.length} cinéma(s) trouvé(s) à ${cinemasInCity[0].commune}</strong><br><br>`;
         html += `<strong>Total :</strong> ${totalEcrans} écrans • ${totalFauteuils.toLocaleString()} fauteuils<br><br>`;
-        
+
         cinemasInCity.forEach(cinema => {
             html += `
                 <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
@@ -203,20 +229,20 @@ function searchCity() {
                 </div>
             `;
         });
-        
+
         resultDiv.innerHTML = html;
         resultDiv.className = 'search-result show success';
     }
 }
 
-document.getElementById('searchInput').addEventListener('keypress', function(e) {
+document.getElementById('searchInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         searchCity();
     }
 });
 
 // Event listener pour le sélecteur de graphique
-document.getElementById('topCinemaSelect').addEventListener('change', function(e) {
+document.getElementById('topCinemaSelect').addEventListener('change', function (e) {
     updateChart(e.target.value);
 });
 initSite();

@@ -125,31 +125,7 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/Leaflet.markercluster.js"></script>
     <script src="fetch.js"></script>
     <script>
-        // Menu burger
-        const burgerBtn = document.getElementById('burgerBtn');
-        const navMenu = document.getElementById('navMenu');
-        const navLinks = document.querySelectorAll('nav ul a');
         
-        burgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            burgerBtn.classList.toggle('active');
-        });
-        
-        // Fermer le menu quand on clique sur un lien
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                burgerBtn.classList.remove('active');
-            });
-        });
-        
-        // Fermer le menu si on clique en dehors
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
-                navMenu.classList.remove('active');
-                burgerBtn.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
